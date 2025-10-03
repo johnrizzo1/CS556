@@ -1,0 +1,643 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{CS556-HW3 - Vector Spaces and Subspaces}
+\author{John Rizzo}
+\date{October 5, 2025}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+
+\maketitle
+\noindent
+\textbf{Question 1} (10 points) Write the complete solution of the following linear system:
+
+$x + 2y - z = 1$
+
+$3x + 5y + 2z = 3$
+
+$2x + y + 13z = 2$
+
+Solution 
+
+$\begin{bmatrix}
+1 & 2 & -1 \\
+3 & 5 & 2\\
+2 & 1 & 13
+\end{bmatrix}\begin{bmatrix}
+x \\ y \\ z    
+\end{bmatrix} = \begin{bmatrix}
+    1 \\ 3 \\ 2
+\end{bmatrix}$
+
+R2 = R2 - 3R1
+
+$\begin{bmatrix}
+1 & 2 & -1 \\
+0 & -1 & 5\\
+2 & 1 & 13
+\end{bmatrix}\begin{bmatrix}
+x \\ y \\ z    
+\end{bmatrix} = \begin{bmatrix}
+    1 \\ 0 \\ 2
+\end{bmatrix}$ 
+
+ R3 = R3 - 2R1
+
+$\begin{bmatrix}
+1 & 2 & -1 \\
+0 & -1 & 5\\
+0 & -3 & 15
+\end{bmatrix}\begin{bmatrix}
+x \\ y \\ z    
+\end{bmatrix} = \begin{bmatrix}
+    1 \\ 0 \\ 0
+\end{bmatrix}$
+
+R2 = -1 R2
+
+$\begin{bmatrix}
+1 & 2 & -1 \\
+0 & 1 & -5\\
+0 & 0 & 0
+\end{bmatrix}\begin{bmatrix}
+x \\ y \\ z    
+\end{bmatrix} = \begin{bmatrix}
+    1 \\ 0 \\ 0
+\end{bmatrix}$ RREF
+
+Infinite solutions since the last row is all 0's.
+
+\vspace{2em}
+\noindent
+\textbf{Question 2} (10 points) Find the rank of the following matrix:
+
+$\begin{bmatrix}
+0 & 1 & 2 & 1 \\
+1 & 2 & 3 & 2 \\
+3 & 1 & 1 & 3 
+\end{bmatrix}$ 
+
+Solution
+
+Swap R1, R2
+
+$\begin{bmatrix}
+    1 & 2 & 3 & 2 \\
+    0 & 1 & 2 & 1 \\
+    3 & 1 & 1 & 3
+\end{bmatrix}$
+
+R3 = R3 - 3R1
+
+$\begin{bmatrix}
+    1 & 2 & 3 & 2 \\
+    0 & 1 & 2 & 1 \\
+    0 & -5 & -8 & 3
+\end{bmatrix}$ 
+
+ R3 = R3 + 5R2
+
+$\begin{bmatrix}
+    1 & 2 & 3 & 2 \\
+    0 & 1 & 2 & 1 \\
+    0 & 0 & 2 & 2 
+\end{bmatrix}$
+
+R2 = $1/2R2$
+
+$\begin{bmatrix}
+    \textbf{1} & 2 & 3 & 2 \\
+    0 & \textbf{1} & 2 & 1 \\
+    0 & 0 & \textbf{1} & 1
+\end{bmatrix}$
+
+\textbf{Rank is 3}
+
+\vspace{2em}
+\noindent
+\textbf{Question 3} (10 points) Construct a matrix $A$ whose column space contains vectors $\begin{bmatrix}
+    3 \\ 6 \\ 2
+\end{bmatrix}$ and $\begin{bmatrix}4 \\ 0 \\ 1\end{bmatrix}$, and whose null space contains the vector $\begin{bmatrix}
+    2 \\ 2 \\ 1
+\end{bmatrix}$.
+
+Solution
+
+$A = \begin{bmatrix}
+    3 & 4 & a \\
+    6 & 0 & b \\
+    2 & 1 & c
+\end{bmatrix}$
+
+$x = \begin{bmatrix}
+    2 \\ 2 \\ 1
+\end{bmatrix}$
+
+Null Space, $Ax=0$
+
+6 + 8 + 1a = 0, a = -14
+
+12 + 0 + 1b = 0, b = -12
+
+4 + 2 + c = 0, c = -6
+
+So $A = \begin{bmatrix}
+    3 & 4 & -14 \\
+    6 & 0 & -12 \\
+    2 & 1 & -6
+\end{bmatrix}$ is a matrix with the two column vectors and a Null Space which contains the vector $\begin{bmatrix}
+    2 \\ 2 \\ 1
+\end{bmatrix}$
+
+\vspace{2em}
+\noindent
+\textbf{Question 4} (10 points) Compute the following matrix-vector multiplication as:
+
+$\begin{bmatrix}
+    2 & 1 & 3 \\
+    7 & 1 & 0 \\
+    3 & 5 & 9
+\end{bmatrix}\begin{bmatrix}
+    2 \\ 4 \\ 1
+\end{bmatrix}$
+
+a) Linear combination of columns
+
+$2 \times \begin{bmatrix}
+    2 \\ 7 \\ 3
+\end{bmatrix} + 4 \times \begin{bmatrix}
+    1 \\ 1 \\ 5
+\end{bmatrix} + 1 \times \begin{bmatrix}
+    3 \\ 0 \\ 9
+\end{bmatrix} = \begin{bmatrix}
+    11 \\ 18 \\ 35
+\end{bmatrix}$
+
+b) Dot product of rows
+
+$\begin{bmatrix}
+    2 & 1 & 3 \\
+    7 & 1 & 0 \\
+    3 & 5 & 9
+\end{bmatrix}\begin{bmatrix}
+    2 \\ 4 \\ 1
+\end{bmatrix} = \begin{bmatrix}
+    11 \\ 18 \\ 35
+\end{bmatrix}$
+
+\vspace{2em}
+\noindent
+\textbf{Question 5} (10 points) Find the value of $k$ for which the matrix has:
+
+$A = \begin{bmatrix}
+    1 & 3 & 2 \\
+    2 & 3 & 1 \\
+    4 & 8 & k
+\end{bmatrix}$
+
+a) Dependent Columns
+
+det(A) = $1 \begin{vmatrix}
+    3 & 1 \\ 8 & k
+\end{vmatrix} - 3 \begin{vmatrix}
+    2 & 1 \\ 4 & k
+\end{vmatrix} + 2 \begin{vmatrix}
+    2 & 3 \\ 4 & 8
+\end{vmatrix}$
+
+            $= (3k - 8) - 3(2k - 4) + 2(4)$
+            
+            $ = 3k - 8 -6k + 12 + 8$
+            
+            $= -3k + 12$
+            
+            $k = \frac{-12}{-3} = 4$
+
+For the columns to be dependent the determinate should be 0.  Setting k = 4 causes the determinate to be 0.
+
+b) Independent Columns
+
+Choosing any number other than 4 would cause the determinate not to be 0 and therefore the columns would be independent.
+
+\vspace{2em}
+\noindent
+\textbf{Question 6} (20 points) Find a basis for the four fundamental subspaces of the matrix.
+
+$A = \begin{bmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 1 & 2 & 4 & 6 \\
+    0 & 0 & 0 & 1 & 2
+\end{bmatrix}$
+
+Null Space $N(A)$, ($Ax=0$)
+
+$\begin{bmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 1 & 2 & 4 & 6 \\
+    0 & 0 & 0 & 1 & 2
+\end{bmatrix}x = \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}$
+
+R2 = R2 - R1
+
+$\begin{bmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 0 & 0 & 1 & 2 \\
+    0 & 0 & 0 & 1 & 2
+\end{bmatrix}x = \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}$
+
+R3 = R3 - R2
+
+$\begin{bmatrix}
+    0 & 1 & 2 & 3 & 4 \\
+    0 & 0 & 0 & 1 & 2 \\
+    0 & 0 & 0 & 0 & 0 \\
+    F & P & F & P & F
+\end{bmatrix}x = \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}$ 
+
+Column Space $C(A)$, ($Ax = b$)
+
+The basis for the column space is $\begin{bmatrix}
+    1 \\ 1 \\ 0
+\end{bmatrix}$ and $\begin{bmatrix}
+    4 \\ 6 \\ 2
+\end{bmatrix}$.
+
+Row Space = $R(A) = C^T$
+
+The non-zero rows form the row space, $\begin{bmatrix}
+    0 & 1 & 2 & 3 & 4
+\end{bmatrix}$ and $\begin{bmatrix}
+    0 & 1 & 2 & 4 & 6
+\end{bmatrix}$
+
+Null Space = N(A), ($Ax = 0$)
+
+Let $\hat{x} = \begin{bmatrix}
+    x_1, x_2, x_3, x_4, x_5
+\end{bmatrix}^T$
+
+From Row 2: $x_4 + 2x_5 = 0$ and so $x_4 = -2x_5$
+
+From Row 1: $x_2 + 2x_3 + 3x_4 + 4x_5 = 0$, Substituting $x_4$ into the equation yields 
+
+$x_2 + 2x_3 + 3(-2x_5) + 4x_5 = 0$
+
+$x_2 + 2x_3 - 6x_5 + 4x_5 = 0$
+
+$x_2 + 2x_3 - 2x_5 = 0$
+
+$x_2 = -2x_3 + 2x_5$
+
+Let $x_1 = t, x_3 = s, x_5 = r$
+
+$\hat{x} = \begin{bmatrix}
+    t \\ -2s + 2r \\ s \\ -2r \\ r
+\end{bmatrix} = t\begin{bmatrix}
+    1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix} + s\begin{bmatrix}
+    0 \\ -2 \\ 1 \\ 0 \\ 0
+\end{bmatrix} + r\begin{bmatrix}
+    0 \\ 2 \\ 0 \\ -2 \\ 1
+\end{bmatrix}$
+
+so the basis for the null space is $\begin{bmatrix}
+    1 \\ 0 \\ 0 \\ 0 \\ 0
+\end{bmatrix}, \begin{bmatrix}
+    0 \\ -2 \\ 1 \\ 0 \\ 0
+\end{bmatrix}, \begin{bmatrix}
+    0 \\ 2 \\ 0 \\ -2 \\ 1
+\end{bmatrix}$
+
+Left Null Space = $N(A)^T$
+
+$A^T = \begin{bmatrix}
+    0 & 0 & 0 \\
+    1 & 1 & 0 \\
+    2 & 2 & 0 \\
+    3 & 4 & 1 \\
+    4 & 6 & 2
+\end{bmatrix}$
+
+Let $\hat{y} = \begin{bmatrix}
+    y_1, y_2, y_3
+\end{bmatrix}^T$
+
+$0y_1 + 0y_2 + 0y_3 = 0$
+
+$y_1 + y_2 = 0$, or $y_1 = -y_2$
+
+$2y_1 + 2y_2 + 0y_3 = 0$ or $y_1 = -y_2$
+
+$3y_1 + 4y_2 + 1y_3 = 0$ or when substituting $-y_2$ for $y_1$ $-3y_2 + 4y_2 + y_3 = y_2 + y_3 = 0$ or $y_3 = -y_2 = y_1$
+
+$4y_1 + 6y_2 + 2y_3 = 0$
+
+Finally, if we let $y_2 = s$, $y_1 = -s$, $y_3 = -s$ we have the basis of $\begin{bmatrix}
+    -1 \\ 1 \\ -1
+\end{bmatrix}$
+
+\vspace{2em}
+\noindent
+\textbf{Question 7} (10 points) Consider the vectors $\hat{v} = \begin{bmatrix}
+    1 \\ 2
+\end{bmatrix}$ and $\hat{w} = \begin{bmatrix}
+    1 \\ 0
+\end{bmatrix}$
+\noindent
+a) In the x-y plane mark all nine linear combinations $c\hat{v} + d\hat{w}$, with $c = \{-2, 0 -2\}$ and $d = \{ 0, 1, 2\}$.
+
+\noindent
+$-2\hat{v} + 0\hat{w}$  (-2, 0) \\
+$-2\hat{v} + 1\hat{w}$  (-2, 1) \\
+$-2\hat{v} + 2\hat{w}$  (-2, 2) \\
+$0\hat{v} + 0\hat{w}$   (0, 0) \\
+$0\hat{v} + 1\hat{w}$   (0, 1) \\
+$0\hat{v} + 2\hat{w}$   (0, 2) \\
+$2\hat{v} + 0\hat{w}$   (2, 0) \\
+$2\hat{v} + 1\hat{w}$   (2, 1) \\
+$2\hat{v} + 2\hat{w}$   (2, 2)\\
+
+$\begin{tikzpicture}
+  \begin{axis}[
+    xlabel={$x$-axis}, ylabel={$y$-axis},
+    width=10cm, height=10cm,
+    grid=major,
+  ]
+  \addplot[
+    only marks,
+    mark=*,
+    color=blue]
+  coordinates {
+    ((-2,0) (-2,1)(-2,2)(0,0)(0,1)(0,2)(2,0)(2,1)(2,2))
+  };
+  \end{axis}
+\end{tikzpicture}$
+
+\noindent
+b) What shape do all linear combinations $c\hat{v} + d\hat{w}$ fill? A line? The whole plane? Are the vectors $\hat{v}$ and $\hat{w}$ independent?
+
+The linear combinations span the whole plane.  
+
+From computing the determinate will can assess the independence of the vectors $\hat{v}$ and $\hat{w}$.
+
+$det\begin{bmatrix}
+    1 & 1 \\
+    2 & 0
+\end{bmatrix} = (1 \times 0 - 1 \times 2) = -2$
+
+The vectors are independent because the determinate is not 0.
+
+\vspace{2em}
+\noindent
+\textbf{Question 8} (10 points) Consider the vectors $\hat{u} = \begin{bmatrix}
+    1 \\ 0 \\ 1
+\end{bmatrix}$, $\hat{v} = \begin{bmatrix}
+    0 \\ -1 \\ 1
+\end{bmatrix}$ and $\hat{w} = \begin{bmatrix}
+    2 \\ 1 \\ 0
+\end{bmatrix}$.
+
+a) Can you solve the system $x\hat{u} + y\hat{v} + z\hat{w} = \hat{b}$ if $\hat{b} = \begin{bmatrix}
+    0 \\ 0 \\ 1
+\end{bmatrix}$?
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    1 & 1 & 0 & 1
+\end{bmatrix}$
+
+R3 = R3 - R1
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    0 & 1 & -2 & 1
+\end{bmatrix}$
+
+R3 = R3 + R2
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    0 & 0 & -1 & 1
+\end{bmatrix}$
+
+-1R2, -1R3
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & 1 & -1 & 0 \\
+    0 & 0 & 1 & -1
+\end{bmatrix}$
+
+R2 = R2 + R3
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & 1 & 0 & -1 \\
+    0 & 0 & 1 & -1
+\end{bmatrix}$
+
+R1 = R1 -2R3
+
+$\begin{bmatrix}
+    1 & 0 & 0 & 2 \\
+    0 & 1 & 0 & -1 \\
+    0 & 0 & 1 & -1
+\end{bmatrix}$
+
+$x = 2$
+$y = -1$
+$z = -1$
+
+b) What if $\hat{b} = \begin{bmatrix}
+    0 \\ 0 \\ 0
+\end{bmatrix}$? How many solutions are there?
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    1 & 1 & 0 & 0
+\end{bmatrix}$
+
+R3 = R3 - R1
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    0 & 1 & -2 & 0
+\end{bmatrix}$
+
+R3 = R3+R2
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & -1 & 1 & 0 \\
+    0 & 0 & -1 & 0
+\end{bmatrix}$
+
+-1R2, -1R2
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & 1 & -1 & 0 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}$
+
+R2 = R2+R3
+
+$\begin{bmatrix}
+    1 & 0 & 2 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}$
+
+R1 = R1-2R3
+
+$\begin{bmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0 \\
+    0 & 0 & 1 & 0
+\end{bmatrix}$
+
+\textbf{\textit{There are infinitely many solutions?}}
+
+c) Are the vectors $\hat{u}$, $\hat{v}$, and $\hat{w}$ dependent or independent?
+
+d) Use parts (a) - (c) to decide if $A = \begin{bmatrix}
+    1 & 0 & 2 \\
+    0 & -1 & 1 \\
+    1 & 1 & 0
+\end{bmatrix}$ is an invertible matrix or not.
+
+\vspace{2em}
+\noindent
+\textbf{Question 9} (10 points) Consider the linear system for some constants $b$ and $g$:
+
+$x - 2y + 3z = 3$
+
+$2x + y + bz = -4$
+
+$x + 0y + 1z = g$
+
+Converted to an augmented matrix
+
+$\left[
+\begin{array}{ccc|c}
+  1 & -2 & 3 & 3 \\
+  2 & 1 & b& -4\\
+  1 & 0 & 1 & g
+\end{array}
+\right]$
+
+Gaussian Elimination
+
+R2 = R2 - 2R1
+
+$\left[
+\begin{array}{ccc|c}
+  1 & -2 & 3 & 3 \\
+  0 & 5 & b-6 & -10\\
+  1 & 0 & 1 & g
+\end{array}
+\right]$
+
+R3 = R3 - R1
+
+$\left[
+\begin{array}{ccc|c}
+  1 & -2 & 3 & 3 \\
+  0 & 5 & b-6 & -10\\
+  0 & 2 & -2 & g - 3
+\end{array}
+\right]$
+
+$R3 = R3 - \frac{2}{5}R2$
+
+$\left[
+\begin{array}{ccc|c}
+  1 & -2 & 3 & 3 \\
+  0 & 5 & b-6 & -10\\
+  0 & 0 & \frac{2}{5} (1 - b) & g + 1
+\end{array}
+\right]$
+
+a) What constant b makes the system singular (missing a pivot).
+
+When the third row's coefficient for z is zero.  This is the case when $\frac{2}{5}(1-b) = 0$, which is the case when $1-b = 0$, $b=1$.
+
+b) For the value of $b$ found in Part (a), for which values of $g$, does the system have infinitely many solutions?
+
+Continuing for $b=1$ we can see the values of $g$ for which the system has infinitely many solutions.
+
+$\left[
+\begin{array}{ccc|c}
+  1 & -2 & 3 & 3 \\
+  0 & 5 & b-6 & -10\\
+  0 & 0 & 0 & g + 1
+\end{array}
+\right]$
+
+For there to be infinitely many solutions the third row solution should be 0 = 0 which is the case when g = -1.
+
+c) Find two distinct solutions of the system for that $g$.
+
+For the values $b=1$ and $g = -1$ the system simplifies to
+
+$x - 2y + 3z = 3$
+
+$2x + y + 1z = -4$
+
+$x+z = -1$ or $x = -1 -z$
+
+Substituting $x=-1-z$ back into the other two equations yields
+
+Substitution 1
+
+$(-1 - z) - 2y + 3z = 3$
+
+$- 2y + 2z = 4$
+
+$-y+z=2$
+
+$z-y = 2$
+
+Substitution 2
+
+$2(-1 -z) + y + z = -4$
+
+$y - z = -2$
+
+$y = z - 2$
+
+so we have
+
+$x=-1-z$ 
+
+$y = z - 2$
+
+z is free
+
+Solutions
+
+For $z = 0$, $x=-1-0=-1$, $y = 0 - 2 = -2$
+
+For $z = 1$, $x = -1 -1 = -2$, $y = 1 -2 = -1$
+
+
+\end{document}
