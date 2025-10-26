@@ -1,0 +1,241 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Mathematical Foundations of Machine Learning Cheat Sheet
+%
+% Created by John Rizzo 
+% Copyright October, 2025
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass{article}
+\usepackage[landscape]{geometry}
+\usepackage{url}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing}
+\usepackage{amsmath,amssymb}
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+
+\title{Mathematical Foundations of Machine Learning Cheat Sheet}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+
+\advance\topmargin-.8in
+\advance\textheight3in
+\advance\textwidth3in
+\advance\oddsidemargin-1.5in
+\advance\evensidemargin-1.5in
+\parindent0pt
+\parskip2pt
+\newcommand{\hr}{\centerline{\rule{3.5in}{1pt}}}
+% \colorbox[HTML]{e4e4e4}{\makebox[\textwidth-2\fboxsep][l]{texto}
+\begin{document}
+
+\begin{center}{\huge{\textbf{Mathematical Foundations of Machine Learning Cheat Sheet}}}\\
+{\large By John Rizzo}
+\end{center}
+\begin{multicols*}{3}
+
+%------------ Matrices and Vectors ---------------
+\tikzstyle{mybox} = [draw=black, fill=white, very thick, rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+\begin{tikzpicture}
+\node [mybox] (box){
+    \begin{minipage}{0.3\textwidth}
+        Vector Addition: $x = \begin{bmatrix}0 \\ 2\end{bmatrix}$ $y = \begin{bmatrix}2 \\ 2\end{bmatrix}$ $x + y = \begin{bmatrix}2 \\ 4\end{bmatrix}$ \\
+        Scalar Multiplication: if $x=\begin{bmatrix}2 \\ 2\end{bmatrix}$ then $2x = \begin{bmatrix}4 \\ 4\end{bmatrix}$ \\
+        Dot Product: $\hat{v} = \begin{bmatrix}3 \\ 4\end{bmatrix}$ $\hat{w}=\begin{bmatrix}4 \\ 3\end{bmatrix}$ $v \cdot w = 3 \times 4 + 4 \times 3 = 24$ \\
+        \begin{itemize}
+            \item Distributive $u^T(v+w)=u^Tv+u^Tw$
+            \item Commutative: $u^Tv = v^Tu$
+            \item Not Associative: $u^T(v^Tw) \not= (u^Tv)^Tw$
+            \item Vector Length/Magnitude: $\|v\| = \sqrt{3^2 + 4^2} = 5$
+        \end{itemize}
+        Unit Vectors: $\mu = \frac{1}{\|v\|}$ \\
+        Matrix Addition: $A + B = \begin{bmatrix}a_11+b_11 & a_12+b_12 \\ a_21+b_21 & a_22+b_22\end{bmatrix}$ \\
+        Matrix Scalar Multiplication $\delta A = \begin{bmatrix}\delta a_{11} & \delta a_{12} \\ \delta a_{21} & \delta a_{21}\end{bmatrix}$ \\
+        Transpose: $A=\begin{bmatrix}1 & 2 \\ 3 & 4\end{bmatrix}$ $A^T=\begin{bmatrix}1 & 3 \\ 2 & 4\end{bmatrix}$ \\
+        Matrix Trace: $A=\begin{bmatrix}\textbf{3} & 2 & 4 \\ 2 & \textbf{5} & 6 \\ 4 & 6 & \textbf{8}\end{bmatrix}$ trace($A$) = 16 \\
+        Matrix Multiplication: \\
+        $A=\begin{bmatrix}1 & 2 & 3 \\ 3 & 2 & 1\end{bmatrix}$, $B=\begin{bmatrix}0 & 2 \\ 1 & 1 \\ 0 & 1\end{bmatrix}$, $AB = \begin{bmatrix}2&7\\2&9\end{bmatrix}$
+    \end{minipage}
+};
+
+\node[fancytitle, right=10pt] at (box.north west) {Matrices and Vectors};
+\end{tikzpicture}
+%------------ Matrices and Vectors ---------------------
+
+%------------ Properties of Determinants --------------
+\tikzstyle{mybox} = [draw=black, fill=white, very thick, rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        \begin{itemize}
+            \item det(I) = 1
+            \item det(A) = 0 when two rows are equal
+            \item det(A) = 0 when matrix has row of 0's
+            \item if A is singular det(A) = 0, if A is invertible det(A) $\not=$ 0
+            \item det(AB) = det(A)det(B)
+            \item $det(A^T) = det(A)$
+        \end{itemize}
+    \end{minipage}
+};
+
+\node[fancytitle, right=10pt] at (box.north west) {Properties of Determinants};
+\end{tikzpicture}
+%------------ Properties of Determinants --------------
+\vspace{2em}
+
+%------------ The Determinant -------------------------
+\tikzstyle{mybox} = [draw=black, fill=white, very thick, rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        Example: $A=\begin{bmatrix}1&2&3\\3&1&2\\0&0&1\end{bmatrix}$\\
+        $det(A) = (-1)^{1+1}\cdot1\begin{vmatrix}1&2\\0&1\end{vmatrix}$
+        $+(-1)^{1+2}\cdot2\begin{vmatrix}3&2\\0&1\end{vmatrix}$
+        $+(-1)^{1+3}\cdot3\begin{vmatrix}3&1\\0&0\end{vmatrix}$
+        $=1(1-0)-2(3-0+3(0-0)=-5$
+    \end{minipage}
+};
+
+\node[fancytitle, right=10pt] at (box.north west) {The Determinant};
+\end{tikzpicture}
+%------------ The Determinant --------------
+
+%------------ The Inverse Matrix -----------
+\tikzstyle{mybox} = [draw=black, fill=white, very thick, rectangle, rounded corners, inner sep=10pt, inner ysep=10pt]
+\tikzstyle{fancytitle} =[fill=black, text=white, font=\bfseries]
+
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        Invertibility Test
+        \begin{itemize}
+            \item Must have non-zero pivots after elimination
+            \item the det(A) must be non-zero
+            \item Ax = 0, where x = 0 must be the only solution.
+        \end{itemize}
+        Gauss-Jordan Elimination $\begin{bmatrix}A\|I\end{bmatrix} => \begin{bmatrix}I\|A\end{bmatrix}$\\
+        
+        e.g. for $A=\begin{bmatrix}a_{11} & a_{12} \\ a_{21} & a_{22}\end{bmatrix}$ \\
+        $A^{-1} = \frac{1}{a_{11}a_{22}-a_{12}a{21}}\begin{bmatrix}a_{22} & -a_{12} \\ -a_{21} & a_{11}\end{bmatrix}$ \\
+        = $\frac{1}{det(A)}\begin{bmatrix}a_{22} & -a_{12} \\ -a_{21} & a_{11}\end{bmatrix}$
+
+        e.g. for $A=\begin{bmatrix}1&2&1\\4&4&5\\6&7&7\end{bmatrix}$
+        Minors = $\begin{bmatrix}-7 & -2 & +4 \\ +7 & +1 & -5 \\ +6 & +1 & -4\end{bmatrix}$\\
+        Cofactors = $\begin{bmatrix}-7 & +2 & +4 \\ -7 & +1 & +5 \\ +6 & -1 & -4\end{bmatrix}$\\
+        Adjugate = $Cofactors^T = \begin{bmatrix}-7&-7&+6\\+2&+1&-1\\+4&+5&-4\end{bmatrix}$
+        A^{-1} = $\begin{bmatrix}-7&-7&6\\2&1&-1\\4&5&-4\end{bmatrix}$
+    \end{minipage}
+};
+
+\node[fancytitle, right=10pt] at (box.north west) {The Inverse Matrix};
+\end{tikzpicture}
+%------------ The Inverse Matrix -----------------------------
+
+\vspace{4em}
+%------------ Spaces/Subspaces ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The four fundamental subspaces of $A_{mxn}$
+	\begin{center}\small{\begin{tabular}{lp{6cm} r}
+Column Space    & $C(A)\in\mathbb{R}^m$     $Ax=b$ \\
+Null Space      & $N(A)\in\mathbb{R}^n$     $Ax=0$ \\
+Row Space       & $C(A^T)\in\mathbb{R}^n$   $A^Tx=b$\\
+Left Null Space & $N(A^T)\in\mathbb{R}^m$   $A^Tx=0$
+	\end{tabular}}\end{center}
+    The complete solution to Ax = b
+    \begin{itemize}
+        \item set all free variables to 0, solve Ax=b for pivot variables to find $X_{particular}$.
+        \item find the null space: $X_{nullspace}$
+        \item the complete solution is $x = x_{particular} + x_{nullspace}$
+    \end{itemize}
+    To solve for matrix rank, Guassian Elimination until REF, count the pivots.
+    Linear Independence: z cannot be expressed as a linear combination of x and y.
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Spaces/Subspaces};
+\end{tikzpicture}
+%------------ Spaces/Subspaces ---------------------
+
+%------------ Projections ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    The projection of b onto a line \\
+    $\textbf{p}=\frac{a^Tb}{a^Ta}a$
+    $\textbf{P}=\frac{aa^T}{a^Ta}$ \\
+    The projection of \textbf{b} onto the subspace spanned by the columns of A\\
+    $\textbf{p}=A(A^TA)^{-1}A^T\textbf{b}$ 
+    $\textbf{P}=A(A^TA)^{-1}A^T$ \\
+    Two vectors are orthogonal when their dot product is 0. \\
+    If $A$ has linearly independent columns then $A^TA$ is invertible
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Projections};
+\end{tikzpicture}
+%------------ Projections ---------------------
+
+\vspace{4em}
+%------------ Gram-Schmidt Process ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+    \begin{itemize}
+        \item Let A=a
+        \item $B=b-\frac{A^Tb}{A^TA}A$
+        \item $C=c-\frac{A^Tc}{A^TA}A-\frac{B^Tc}{B^TB}B$
+        \item $q_1=\frac{A}{\|A\|} q_2=\frac{B}{\|B\|} q_3=\frac{C}{\|C\|}$
+    \end{itemize}
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Gram-Schmidt Process};
+\end{tikzpicture}
+%------------ Gram-Schmidt Process ---------------------
+
+%------------ Matrix Decomposition ---------------------
+\begin{tikzpicture}
+\node [mybox] (box){%
+    \begin{minipage}{0.3\textwidth}
+        Finding Eigenvalues $det(A-\lambda I)=0$ \\
+        Let $A=\begin{bmatrix}
+            1 & 0 \\
+            0 & 2
+        \end{bmatrix}$
+        solve for $det(\begin{bmatrix}
+            1- \lambda & 0 \\
+            0 & 2 - \lambda
+        \end{bmatrix})$ \\
+        $(1 - \lambda)(2 - \lambda) = 0$ \\
+        $\lambda = 1, \begin{bmatrix}0 & 0 \\ 0 & 1\end{bmatrix}\begin{bmatrix}v_1 \\ v_2\end{bmatrix} = \begin{bmatrix}0 \\ v_2\end{bmatrix} = 0$, $v=\begin{bmatrix}1 \\ 0\end{bmatrix}$ \\
+        $\lambda = 2, \begin{bmatrix}-1 & 0 \\ 0 & 0\end{bmatrix}\begin{bmatrix}v_1 \\ v_2\end{bmatrix} = \begin{bmatrix}-v_1 \\ 0\end{bmatrix} = 0$, $v=\begin{bmatrix}0 \\ 1\end{bmatrix}$
+        \\
+        \\
+        Compute the SVD \\
+        A is given, $A = U \Sigma V^T$ \\
+        $det(A^TA - \lambda I) = 0$ \\
+        V is the matrix composed of $v_1$ and $v_2$ from calculating the determinant \\
+        $ \Sigma = \begin{bmatrix}\sqrt{\lambda_1} & 0 \\ 0 & \sqrt{\lambda_2}\end{bmatrix} $ \\
+        U is found by calculating $u_1 = \frac{Av_1}{\delta_1}$, $\delta_1 = \frac{1}{\sqrt{\lambda_1}}$ and $u_2 = \frac{Av_2}{\delta_2}$, $\delta_2 = \frac{1}{\sqrt{\lambda_2}}$
+    \end{minipage}
+};
+\node[fancytitle, right=10pt] at (box.north west) {Matrix Decomposition};
+\end{tikzpicture}
+%------------ Matrix Decomposition ---------------------
+
+
+\end{multicols*}
+\end{document}
+Contact John Rizzo © 2025
