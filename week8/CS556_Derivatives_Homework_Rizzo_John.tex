@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{CS556 - Derivatives Homework}
+\author{John Rizzo}
+\date{October 9, 2025}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+
+\maketitle
+\noindent
+\textbf{Question 1} (20 points): Use the limit definition of the derivative to exactly evaluate the derivative:
+
+\begin{enumerate}
+    \item f(x) = $\sqrt{x+4}$
+    \item f(x) = $\frac{3}{x}$
+\end{enumerate}
+
+\textbf{Solution:}
+\begin{enumerate}
+    \item For $f(x) = \sqrt{x+4}$, the derivative using the limit definition is:
+    \[
+    f'(x) = \lim_{h \to 0} \frac{\sqrt{(x+h)+4} - \sqrt{x+4}}{h}
+    \]
+    Rationalizing the numerator:
+    \[
+    = \lim_{h \to 0} \frac{(\sqrt{x+h+4} - \sqrt{x+4})(\sqrt{x+h+4} + \sqrt{x+4})}{h(\sqrt{x+h+4} + \sqrt{x+4})}
+    \]
+    \[
+    = \lim_{h \to 0} \frac{(x+h+4) - (x+4)}{h(\sqrt{x+h+4} + \sqrt{x+4})}
+    \]
+    \[
+    = \lim_{h \to 0} \frac{h}{h(\sqrt{x+h+4} + \sqrt{x+4})}
+    \]
+    \[
+    = \lim_{h \to 0} \frac{1}{\sqrt{x+h+4} + \sqrt{x+4}} = \frac{1}{2\sqrt{x+4}}
+    \]
+
+    Thus, $f'(x) = \frac{1}{2\sqrt{x+4}}$.
+
+    \item For $f(x) = \frac{3}{x}$, the derivative using the limit definition is:
+    \[
+    f'(x) = \lim_{h \to 0} \frac{\frac{3}{x+h} - \frac{3}{x}}{h}
+    \]
+    Finding a common denominator:
+    \[
+    = \lim_{h \to 0} \frac{\frac{3x - 3(x+h)}{(x+h)x}}{h}
+    \]
+    \[
+    = \lim_{h \to 0} \frac{\frac{-3h}{(x+h)x}}{h}
+    \]
+    Simplifying:
+    \[
+    = \lim_{h \to 0} \frac{-3}{(x+h)x} = -\frac{3}{x^2}
+    \]
+
+    Thus, $f'(x) = -\frac{3}{x^2}$.
+\end{enumerate}
+
+\textbf{Question 2} (\textit{20 points}) Find the derivative of the following functions:
+
+\begin{enumerate}
+    \item $f(x) = 3x^3 - \frac{4}{x^2} = 9x^2 - 4x^{-2}$
+    \item $f(x) = (4 - x^2)^3$ = $u^3$ where $u = 4 - x^2$, so $f'(u) = 3u^2$ and $u' = -2x$ so by the chain rule $f'(x) = f'(u) \cdot u' = 3(4 - x^2)^2 \cdot (-2x) = -6x(4 - x^2)^2$
+    \item $f(x) = e^{sin(x)}$
+    $f'(x) = e^{sin(x)} \cdot cos(x)$ by the chain rule.
+    \item $f(x) = ln(x+2)$
+    $f'(x) = \frac{1}{x+2}$
+    \item $f(x) = x^2cos(x) + xtan(x)$ \\
+    Using the product rule:
+    $f'(x) = 2xcos(x) - x^2sin(x) + tan(x) + xsec^2(x)$
+    \item $f(x) = \sqrt{3x^2+2}$ \\
+    $f'(x) = \frac{1}{2\sqrt{3x^2+2}} \cdot 6x = \frac{6x}{2\sqrt{3x^2+2}} = \frac{3x}{\sqrt{3x^2+2}}$
+\end{enumerate}
+
+\end{document}
