@@ -17,6 +17,7 @@
 
 \maketitle
 \noindent
+\vspace{1cm}
 \textbf{Question 1} (20 points): Use the limit definition of the derivative to exactly evaluate the derivative:
 
 \begin{enumerate}
@@ -65,6 +66,7 @@
     Thus, $f'(x) = -\frac{3}{x^2}$.
 \end{enumerate}
 
+\vspace{1cm}
 \textbf{Question 2} (\textit{20 points}) Find the derivative of the following functions:
 
 \begin{enumerate}
@@ -79,6 +81,109 @@
     $f'(x) = 2xcos(x) - x^2sin(x) + tan(x) + xsec^2(x)$
     \item $f(x) = \sqrt{3x^2+2}$ \\
     $f'(x) = \frac{1}{2\sqrt{3x^2+2}} \cdot 6x = \frac{6x}{2\sqrt{3x^2+2}} = \frac{3x}{\sqrt{3x^2+2}}$
+    \item $f(x) = \frac{x}{4}\sin^{-1}(x)$ \\
+    Using the product rule:
+    $f'(x) = \frac{1}{4}\sin^{-1}(x) + \frac{x}{4} \cdot \frac{1}{\sqrt{1 - x^2}} = \frac{\sin^{-1}(x)}{4} + \frac{x}{4\sqrt{1 - x^2}}$
+
+    \item $x^2y = (y+2) + xy\sin(x)$ \\
+    $y = \frac{(y+2) + xy\sin(x)}{x^2}$ \\
+    Calculate the derivative of both sides \\
+    Left Side: $\frac{d}{dx}(x^2y) = \frac{d}{dx}(x^2) \cdot y + x^2 \cdot \frac{dy}{dx} = 2xy + x^2 \frac{dy}{dx}$ \\
+    Right Side: $\frac{d}{dx}((y+2) + xy\sin(x)) = \frac{dy}{dx} + y\sin(x) + x\frac{dy}{dx}\sin(x) + xy\cos(x)$ \\
+    Setting the derivatives equal:
+    $2xy + x^2 \frac{dy}{dx} = \frac{dy}{dx} + y\sin(x) + x\frac{dy}{dx}\sin(x) + xy\cos(x)$ \\
+    Rearranging to isolate $\frac{dy}{dx}$:
+    $x^2 \frac{dy}{dx} - \frac{dy}{dx} - x\frac{dy}{dx}\sin(x) = y\sin(x) + xy\cos(x) - 2xy$ \\
+    $\frac{dy}{dx}(x^2 - 1 - x\sin(x)) = y\sin(x) + xy\cos(x) - 2xy$ \\
+    Finally:
+    $\frac{dy}{dx} = \frac{y\sin(x) + xy\cos(x) - 2xy}{x^2 - 1 - x\sin(x)}$
 \end{enumerate}
+
+\vspace{1cm}
+\textbf{Question 3} (\textit{20 points}) The following questions consider the wind speeds of Hurricane Katrina, which affected New Orleans, Lousiana, in August 2005.  The data are displayed in a table.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Wind Speeds of Hurricane Katrina on August 26, 2005}
+
+    \begin{tabular}{|c|c|}
+        \hline
+        Hours After Midnight & Wind Speed (mph) \\
+        \hline
+        1 & 45 \\
+        \hline
+        5 & 75 \\
+        \hline
+        11 & 100 \\
+        \hline
+        29 & 115 \\
+        \hline
+        49 & 145 \\
+        \hline
+        58 & 175 \\
+        \hline
+        73 & 155 \\
+        \hline
+        81 & 125 \\
+        \hline
+        85 & 95 \\
+        \hline
+        107 & 35 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\begin{enumerate}
+    \item Using the table, estimate the deriative of the wind speed at hour 39.  What is the physical meaning?
+
+    To estimate the derivative at hour 39, we can use the data points at hours 29 and 49:
+    \[f'(39) \approx \frac{f(49) - f(29)}{49 - 29} = \frac{145 - 115}{20} = \frac{30}{20} = 1.5 \text{ mph per hour}\]
+    The physical meaning of this derivative is that at hour 39, the wind speed of Hurricane Katrina was increasing at a rate of approximately 1.5 miles per hour for each hour.
+
+    \item Estimate the derivative of the wind speed at hour 83.  What is the physical meaning?
+    
+    To estimate the derivative at hour 83, we can use the data points at hours 81 and 85:
+    \[f'(83) \approx \frac{f(85) - f(81)}{85 - 81} = \frac{95 - 125}{4} = \frac{-30}{4} = -7.5 \text{ mph per hour}\]       
+    The physical meaning of this derivative is that at hour 83, the wind speed of Hurricane Katrina was decreasing at a rate of approximately 7.5 miles per hour for each hour.
+\end{enumerate}
+
+\vspace{1cm}
+\textbf{Question 4} (\textit{20 points}) The famous Regiomontanus' problem for angle maximization was proposed during the 15th centrury.  A painting hangs on a wall with the bottom of the painting a distance $a$ feet above eye level, and the top $b$ feet above eye level. What distance $x$ (in feet) from the wall should the viewer stand to maximize the angle subtended by the painting, $\theta$?
+
+\textbf{Solution:}
+$tan(\theta - \alpha) = \frac{tan(\theta) - tan(\alpha)}{1 + tan(\theta)tan(\alpha)}$ \\
+$ = \frac{\frac{b}{x} - \frac{a}{x}}{1 + \frac{b}{x} \cdot \frac{a}{x}}$ \\
+$ = \frac{\frac{b-a}{x}}{1 + \frac{ab}{x^2}}$ \\
+$ = \frac{(b-a)x}{x^2 + ab}$ \\
+To maximize $\theta$, we maximize $tan(\theta)$: \\
+Let $f(x) = \frac{(b-a)x}{x^2 + ab}$ \\
+Using the quotient rule: \\
+$f'(x) = \frac{(b-a)(x^2 + ab) - (b-a)x(2x)}{(x^2 + ab)^2}$ \\
+$= \frac{(b-a)(ab - x^2)}{(x^2 + ab)^2}$ \\
+Setting $f'(x) = 0$ to find critical points: \\
+$(b-a)(ab - x^2) = 0$ \\
+Since $b \neq a$, we have: \\
+$ab - x^2 = 0$ \\
+$x^2 = ab$ \\
+$x = \sqrt{ab}$ \\
+Thus, the viewer should stand a distance of $\sqrt{ab}$ feet from the wall to maximize the angle subtended by the painting.
+
+\vspace{1cm}
+\textbf{Question 5} (\textit{20 points}) An airline sells tickets from Tokyo to Detroit for \$1200.  There are 500 seats available and a typical flight books 350 seats.  For every \$10 decrease in price, the airline observes an additional five seats sold.  What should the fare be to maximize profit? How many passengers would be onboard?
+
+\textbf{Solution:}
+Let $x$ be the number of \$10 decreases in price.  Then the price per ticket is $1200 - 10x$ and the number of passengers is $350 + 5x$.  The profit function is:
+\[P(x) = (1200 - 10x)(350 + 5x) \]
+Expanding:
+\[P(x) = 420000 + 6000x - 3500x - 50x^2 \]
+\[P(x) = -50x^2 + 2500x + 420000 \]
+To find the maximum profit, we can take the derivative of the profit function with respect to \( x \) and set it to zero:
+\[ \frac{dP}{dx} = -100x + 2500 \]
+Setting the derivative equal to zero:
+\[ -100x + 2500 = 0 \implies x = 25 \]
+Substituting \( x = 25 \) back into the price and passenger equations:
+\[ \text{Price} = 1200 - 10 \times 25 = 950 \text{ dollars} \]
+\[ \text{Passengers} = 350 + 5 \times 25 = 475 \]
+Therefore, the airline should set the fare at \$950 to maximize profit, with 475 passengers onboard.
 
 \end{document}
