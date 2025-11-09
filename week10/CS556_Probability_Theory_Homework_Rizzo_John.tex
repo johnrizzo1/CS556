@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+\title{CS556 - Probability Theory Homework}
+\author{John Rizzo}
+\date{November 16, 2025}
+
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+
+\maketitle
+\noindent
+\textbf{Question 1} (20 points): 
+Top 7 cards are drawn from a well-shuffled standard 52-card deck. Find probability that:
+\begin{enumerate}
+    \item The 7 cards include exactly 3 aces.
+        The probability can be calculated as follows:
+        \[P(\text{exactly 3 aces}) = \frac{\binom{4}{3} \cdot \binom{48}{4}}{\binom{52}{7}}\]
+    \item The 7 cards include exactly 2 kings.
+        The probability can be calculated as follows:
+        \[P(\text{exactly 2 kings}) = \frac{\binom{4}{2} \cdot \binom{48}{5}}{\binom{52}{7}}\]
+    \item The 7 cards include exactly 3 aces, or exactly 2 kings
+        The probability can be calculated as follows:
+        \[P(\text{exactly 3 aces or exactly 2 kings}) = P(\text{exactly 3 aces}) + P(\text{exactly 2 kings})\]
+\end{enumerate}
+
+
+\vspace{1cm}
+\textbf{Question 2} (20 points): Alice and Bob have 2n+1 coins, each coin with probability of heads equal to $\frac{1}{2}$.  Bob tosses $n+1$ coins, while Alice tosses the remaining $n$ coins.  Assuming independent coin tosses, show that the probability that after all coins have been tossed, Bob will have gotten more heads than Alice is $\frac{1}{2}$. \\ \\
+The solution to the problem can be approached by considering the symmetry of the situation. Since Bob tosses one more coin than Alice, the probability that Bob has more heads than Alice is equal to the probability that Alice has more heads than Bob, plus the probability that they have the same number of heads. However, since there is an odd number of total coins, it is impossible for them to have the same number of heads. Therefore, the probabilities must be equal, leading to the conclusion that the probability that Bob has more heads than Alice is $\frac{1}{2}$.
+
+\vspace{1cm}
+\noindent
+\textbf{Question 3} (20 points): 
+
+We are given three coins: one has heads in both faces, the second has tails in both faces, and the third has a head in one face and a tail in the other.  We choose a coin at random, toss it, and the result is heads.  What is the probability that the opposite face is tails?
+
+\noindent
+\textbf{Solution}:
+
+Let A be the event that the chosen coin is the one with heads on both sides, B be the event that the chosen coin is the one with tails on both sides, and C be the event that the chosen coin is the one with one head and one tail. Let H be the event that the result of the toss is heads. We want to find $P(C|H)$. 
+
+Using Bayes' theorem, we have:
+\[P(C|H) = \frac{P(H|C)P(C)}{P(H|A)P(A) + P(H|B)P(B) + P(H|C)P(C)}\]
+
+Calculating the probabilities, we find:
+\begin{enumerate}
+    \item $P(A) = \frac{1}{3}$, $P(B) = \frac{1}{3}$, $P(C) = \frac{1}{3}$
+    \item $P(H|A) = 1$ since both sides are heads.
+    \item $P(H|B) = 0$ since both sides are tails.
+    \item $P(H|C) = \frac{1}{2}$ since one side is heads and the other is tails.
+\end{enumerate}
+
+Substituting these values into Bayes' theorem, we get:
+\[P(C|H) = \frac{\frac{1}{2} \cdot \frac{1}{3}}{1 \cdot \frac{1}{3} + 0 \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{3}} = \frac{\frac{1}{6}}{\frac{1}{3} + \frac{1}{6}} = \frac{\frac{1}{6}}{\frac{1}{2}} = \frac{1}{3}\]
+Therefore, the probability that the opposite face is tails is $\frac{1}{3}$.
+
+\vspace{1cm}
+\noindent
+\textbf{Question 4} (20 points):
+Each of $k$ jars contain $m$ white and $n$ black balls.  A ball is randomly chosen from jar 1 and transferred to jar 2, then a ball is randomly chosen from jar 2 and transferred to jar 3, etc.  Finally, a ball is randomly chosen from jar $k$.  Show that the probability that the last ball is white is the same as the probability that the first ball is white, i.e. it is $\frac{m}{(m+n)}$.\\
+
+\noindent
+\textbf{Solution}:
+Let $P_i(W)$ be the probability that the ball chosen from jar $i$ is white. We will show by induction that $P_i(W) = \frac{m}{m+n}$ for all $i$ from 1 to $k$.
+
+For jar 1, the probability of choosing a white ball is clearly $\frac{m}{m+n}$.  Assume that $P_i(W) = \frac{m}{m+n}$ for some $i < k$. When a ball is transferred from jar $i$ to jar $i+1$, the composition of jar $i+1$ changes, but the probability of choosing a white ball from jar $i+1$ remains $\frac{m}{m+n}$.
+
+By induction, $P_k(W) = \frac{m}{m+n}$, which shows that the probability that the last ball is white is the same as the probability that the first ball is white.
+
+\vspace{1cm}
+\noindent
+\textbf{Question 5} (20 points): 
+A power utility can supply electricity to a city from $n$ different power plants. Power plant
+$i$ fails with probability $p_i$ ($p_i \forall i$ need not be the same), independent of the others.
+\begin{enumerate}
+    \item Suppose that any one plant can produce enough electricity to supply the entire city.
+    What is the probability that the city will experience a black-out?
+    \item Suppose that two power plants are necessary to keep the city from a blackout. Find
+    the probability that the city will experience a blackout.
+\end{enumerate}
+
+\noindent
+\textbf{Solution}:
+\begin{enumerate}
+    \item The probability that the city will experience a blackout is the probability that all power plants fail. Since the failures are independent, this probability is the product of the individual failure probabilities:
+    \[P(\text{blackout}) = \prod_{i=1}^{n} p_i\]
+    \item The probability that the city will experience a blackout is the probability that at least two power plants fail. This can be calculated using the principle of inclusion-exclusion:
+    \[P(\text{blackout}) = \sum_{i=1}^{n} p_i - \sum_{1 \leq i < j \leq n} p_i p_j + \sum_{1 \leq i < j < k \leq n} p_i p_j p_k - \cdots + (-1)^{n+1} p_1 p_2 \cdots p_n\]
+\end{enumerate}
+
+\end{document}
