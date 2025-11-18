@@ -326,38 +326,14 @@ The eigenvalues of the matrix \( A \) are \(\boxed{5}\) and \(\boxed{-1}\), with
 \section*{Question 8} (5 Points) Find the best fit line using least squares approximation for the points (1, 2), (2, 1), (3, 1) in $R^2$
 
 \textbf{Solution}
-To find the best fit line using least squares approximation for the points \((1, 2)\), \((2, 1)\), and \((3, 1)\) in $R^2$, we follow these steps:
 
-Compute the sums needed for the calculations:
-\begin{enumerate}
-      \item $\sum x_i = 1 + 2 + 3 = 6$
-      \item $\sum y_i = 2 + 1 + 1 = 4$
-      \item $\sum x_i y_i = (1)(2) + (2)(1) + (3)(1) = 2 + 2 + 3 = 7$
-      \item $\sum x_i^2 = 1^2 + 2^2 + 3^2 = 1 + 4 + 9 = 14$
-\end{enumerate}
-The best fit line is given by the equation \( y = mx + b \), where the slope \( m \) and the y-intercept \( b \) are calculated as follows:
-
-\noindent
-The slope \( m \) is calculated using the formula:
-\[
-m = \frac{n \sum x_i y_i - \sum x_i \sum y_i}{n \sum x_i^2 - (\sum x_i)^2}
-\]
-\[
-m = \frac{3 \times 7 - 6 \times 4}{3 \times 14 - 6^2} = \frac{21 - 24}{42 - 36} = \frac{-3}{6} = -0.5
-\]
-
-\noindent
-The y-intercept \( b \) is calculated using the formula:
-\[
-b = \frac{\sum y_i - m \sum x_i}{n}
-\]
-Substituting the values:
-\[
-b = \frac{4 - (-0.5) \times 6}{3} = \frac{4 + 3}{3} = \frac{7}{3}
-\]
-Thus, the best fit line is:
-\[
-\boxed{y = -0.5x + \frac{7}{3}}
-\]
+$A^TA\hat{x} = A^T b$ \\
+$A = \begin{bmatrix}1 & 1 \\ 2 & 1 \\ 3 & 1\end{bmatrix}$ \\
+$A^T = \begin{bmatrix}1 & 2 & 3 \\ 1 & 1 & 1\end{bmatrix}$ \\
+$A^TA = \begin{bmatrix}1 & 1 & 1 \\ 1 & 2 & 3\end{bmatrix}\begin{bmatrix}1 & 1 \\ 2 & 1 \\ 3 & 1\end{bmatrix} = \begin{bmatrix}14 & 6 \\ 6 & 3\end{bmatrix}$ \\
+$A^Tb = \begin{bmatrix}1 & 2 & 3 \\ 1 & 1 & 1\end{bmatrix}\begin{bmatrix}2 \\ 1 \\ 1\end{bmatrix} = \begin{bmatrix}7 \\ 4\end{bmatrix}$ \\
+$\hat{x} = (A^TA)^{-1}A^Tb$ \\
+$\hat{x} = (\begin{bmatrix}14 & 6 \\ 6 & 3\end{bmatrix})^{-1}\begin{bmatrix}7 \\ 4\end{bmatrix} = \begin{bmatrix}0.5 \\ \frac{7}{3}\end{bmatrix}$ \\
+The best fit line is $y = 0.5x + \frac{7}{3}$
 
 \end{document}
