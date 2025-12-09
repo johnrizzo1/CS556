@@ -31,7 +31,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 1,
+   "execution_count": 27,
    "metadata": {
     "tags": []
    },
@@ -168,7 +168,7 @@
          "type": "float"
         }
        ],
-       "ref": "e2f03d37-509b-4ce6-96a2-e980c76d1ca6",
+       "ref": "c8450d03-d9e7-4a22-8848-bf7d65660a6c",
        "rows": [
         [
          "housing_median_age",
@@ -340,7 +340,7 @@
          "type": "float"
         }
        ],
-       "ref": "7f244993-8745-45c9-ad87-a2e452e5f18d",
+       "ref": "f25eb32e-5cff-45aa-a0c5-8c8fc63530d8",
        "rows": [
         [
          "count",
@@ -703,7 +703,7 @@
          "type": "boolean"
         }
        ],
-       "ref": "da24120e-b864-4fe9-8393-d344e9f73411",
+       "ref": "12383287-55cf-432c-a9cd-0daf49d18fb7",
        "rows": [
         [
          "0",
@@ -1648,36 +1648,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 22,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "[0.30110561 0.19742525]\n"
-     ]
-    }
-   ],
-   "source": [
-    "print(pca.explained_variance_ratio_)"
-   ]
-  },
-  {
-   "cell_type": "code",
    "execution_count": 23,
-   "id": "1bf24465",
    "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
+      "[0.30110561 0.19742525]\n",
       "[236.61630546 191.59606813]\n"
      ]
     }
    ],
    "source": [
+    "print(pca.explained_variance_ratio_)\n",
     "print(pca.singular_values_)"
    ]
   },
@@ -1726,7 +1710,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 28,
    "metadata": {},
    "outputs": [
     {
@@ -1742,6 +1726,8 @@
    ],
    "source": [
     "mape = mean_absolute_percentage_error(target_scaler.inverse_transform(y_test.reshape(-1, 1)).ravel(), y_preds)\n",
+    "# rmse = np.sqrt(mean_squared_error(target_scaler.inverse_transform(y_test.reshape(-1, 1)).ravel(), y_preds))\n",
+    "# rmse = mean_squared_error(target_scaler.inverse_transform(y_test.reshape(-1, 1)).ravel(), y_preds, squared=False)\n",
     "rmse = root_mean_squared_error(target_scaler.inverse_transform(y_test.reshape(-1, 1)).ravel(), y_preds)\n",
     "r2 = r2_score(target_scaler.inverse_transform(y_test.reshape(-1, 1)).ravel(), y_preds)\n",
     "\n",
@@ -1751,54 +1737,6 @@
     "})\n",
     "print(metrics_table)"
    ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 30,
-   "id": "f704fd43",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Printing the feature importance:\n",
-      "                       Feature  Importance\n",
-      "7                median_income    0.647880\n",
-      "1                     latitude    0.464731\n",
-      "0                    longitude    0.457954\n",
-      "4               total_bedrooms    0.384863\n",
-      "5                   population    0.350110\n",
-      "6                   households    0.127707\n",
-      "3                  total_rooms    0.122626\n",
-      "2           housing_median_age    0.120422\n",
-      "9       ocean_proximity_INLAND    0.108360\n",
-      "8    ocean_proximity_<1H OCEAN    0.055817\n",
-      "12  ocean_proximity_NEAR OCEAN    0.047156\n",
-      "10      ocean_proximity_ISLAND    0.021126\n",
-      "11    ocean_proximity_NEAR BAY    0.020495\n"
-     ]
-    }
-   ],
-   "source": [
-    "print(\"Printing the feature importance:\")\n",
-    "feature_importance = np.abs(model.coef_)\n",
-    "feature_names = X.columns\n",
-    "importance_df = pd.DataFrame({\n",
-    "    'Feature': feature_names,\n",
-    "    'Importance': feature_importance\n",
-    "})\n",
-    "importance_df = importance_df.sort_values('Importance', ascending=False)\n",
-    "print(importance_df)"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": null,
-   "id": "e5c7de0f",
-   "metadata": {},
-   "outputs": [],
-   "source": []
   }
  ],
  "metadata": {
