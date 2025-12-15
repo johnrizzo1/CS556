@@ -1,0 +1,554 @@
+\documentclass[11pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+% Page geometry
+\geometry{margin=1in}
+
+% Header/Footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CS556 Final Exam}
+\rhead{John Rizzo}
+\cfoot{\thepage}
+
+% Custom commands for common math notation
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\argmax}{\operatorname{argmax}}
+\newcommand{\argmin}{\operatorname{argmin}}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{problem}{Problem}
+\newtheorem*{solution}{Solution}
+
+\begin{document}
+
+\begin{center}
+    {\LARGE \textbf{CS556 Final Exam}} \\[0.5em]
+    {\large John Rizzo} \\[0.3em]
+    {\large \today}
+\end{center}
+
+\vspace{1em}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) If possible, give a matrix $A$ which has $\begin{bmatrix}
+    1 \\ 2 \\ 1
+\end{bmatrix}$ as a basis for the column space and $\begin{bmatrix}
+    0 \\ 3 \\ 2 \\ -1
+\end{bmatrix}$ as a basis for the row space. If not possible, give your reason.
+\end{problem}
+
+\begin{solution}
+    It is not possible to have such a matrix $A$. The rank of a matrix is equal to the dimension of its column space and also equal to the dimension of its row space. 
+    Since the rank of $A$ (which is 1) cannot exceed the number of rows or columns, it is impossible for $A$ to have a row space spanned by a 4-dimensional vector while having a column space spanned by a single vector. So, the matrix $A$ cannot exist.
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) Let $A = \begin{bmatrix}
+    1 & 4 \\
+    2 & 3
+\end{bmatrix}$. Find an invertible matrix $S$ that makes $S^{-1}AS$ a diagonal matrix.
+\end{problem}
+
+\begin{solution}
+    $A = \begin{bmatrix}
+        1 & 4 \\
+        2 & 3
+    \end{bmatrix}$
+
+    \begin{align}
+        det(A - \lambda I) &= det\begin{bmatrix}
+            1 - \lambda & 4 \\
+            2 & 3 - \lambda
+        \end{bmatrix} \\
+        &= (1 - \lambda)(3 - \lambda) - 8 \\
+        &= \lambda^2 - 4\lambda - 5 \\
+        &= (\lambda - 5)(\lambda + 1)
+    \end{align}
+
+    The eigenvalues are $\lambda_1 = 5$ and $\lambda_2 = -1$.
+
+    For $\lambda_1 = 5$:
+    \begin{align}
+        (A - 5I)\mathbf{v} &= 0 \\
+        \begin{bmatrix}
+            -4 & 4 \\
+            2 & -2
+        \end{bmatrix} \begin{bmatrix}
+            x_1 \\ x_2
+        \end{bmatrix} &= 0 \\
+        -4x_1 + 4x_2 &= 0 \\
+        2x_1 - 2x_2 &= 0
+    \end{align}
+    
+    This gives the eigenvector $\mathbf{v_1} = \begin{bmatrix}
+        1 \\ 1
+    \end{bmatrix}$.
+
+    For $\lambda_2 = -1$:
+    \begin{align}
+        (A + I)\mathbf{v} &= 0 \\
+        \begin{bmatrix}
+            2 & 4 \\
+            2 & 4
+        \end{bmatrix} \begin{bmatrix}
+            x_1 \\ x_2
+        \end{bmatrix} &= 0 \\
+        2x_1 + 4x_2 &= 0 \\
+        2x_1 + 4x_2 &= 0
+    \end{align}
+
+    This gives the eigenvector $\mathbf{v_2} = \begin{bmatrix}
+        -2 \\ 1
+    \end{bmatrix}$.
+
+    Thus, we can form the matrix $S$ using the eigenvectors as columns:
+    \begin{align}
+        S &= \begin{bmatrix}
+            1 & -2 \\
+            1 & 1
+        \end{bmatrix}
+    \end{align}
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) Each independent question refers to the matrix $A = \begin{bmatrix}
+    4 & 1 \\
+    d & -4 
+\end{bmatrix}$. In each case, find the value of $d$ that makes the statement true (and show your work!).
+\begin{enumerate}[label=(\alph*)]
+    \item Given a value of $d$ such that $\begin{bmatrix}
+        5 \\ 1
+    \end{bmatrix}$ is an eigenvector of $A$. 
+
+    We can find the corresponding eigenvalue $\lambda$:
+    \begin{align}
+        A\begin{bmatrix}
+            5 \\ 1
+        \end{bmatrix} &= \lambda \begin{bmatrix}
+            5 \\ 1
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            4 & 1 \\
+            d & -4 
+        \end{bmatrix} \begin{bmatrix}
+            5 \\ 1
+        \end{bmatrix} &= \lambda \begin{bmatrix}
+            5 \\ 1
+        \end{bmatrix} \\
+        \begin{bmatrix}
+            21 \\ 5d - 4
+        \end{bmatrix} &= \begin{bmatrix}
+            5\lambda \\ \lambda
+        \end{bmatrix}
+    \end{align}
+    From the first row, we have:
+    \begin{align}
+        21 &= 5\lambda \\
+        \lambda &= \frac{21}{5}
+    \end{align}
+    From the second row, we have:
+    \begin{align}
+        5d - 4 &= \lambda \\
+        5d - 4 &= \frac{21}{5} \\
+        5d &= \frac{21}{5} + 4 \\
+        5d &= \frac{21}{5} + \frac{20}{5} \\
+        5d &= \frac{41}{5} \\
+        d &= \frac{41}{25}
+    \end{align}
+
+    \item Given a value of $d$ such that 2 is one of the eigenvalues of $A$.
+    \begin{align}
+        det(A - \lambda I) &= 0 \\
+        det\begin{bmatrix}
+            4 - \lambda & 1 \\
+            d & -4 - \lambda
+        \end{bmatrix} &= 0 \\
+        (4 - \lambda)(-4 - \lambda) - d &= 0 \\
+        \lambda^2 - 16 - d &= 0
+    \end{align}
+    Substituting $\lambda = 2$:
+    \begin{align}
+        (2)^2 - 16 - d &= 0 \\
+        4 - 16 - d &= 0 \\
+        -12 - d &= 0 \\
+        d &= -12
+    \end{align}
+
+    \item Given a value for $d$ such that $A$ is a nondiagonalizable matrix.
+    \begin{align}
+        det(A - \lambda I) &= 0 \\
+        det\begin{bmatrix}
+            4 - \lambda & 1 \\
+            d & -4 - \lambda
+        \end{bmatrix} &= 0 \\
+        (4 - \lambda)(-4 - \lambda) - d &= 0 \\
+        \lambda^2 - 16 - d &= 0
+    \end{align}
+
+\end {enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points)  A rectangular storage container with an open top is to have a volume of $10m^3$.  
+The length of its base is twice the width.  The material for the base costs \$10 per square meter.  
+Material for the sides costs \$6 per square meter.  Find the cost of materials for the cheapest such container.
+\end{problem}
+
+\begin{solution}
+    The Volume of the container is calculated by:
+    \begin{align}
+        V &= l \cdot w \cdot h \\
+        10 &= (2w) \cdot w \cdot h \\
+        10 &= 2w^2h \\
+        h &= \frac{5}{w^2}
+    \end{align}
+    The cost of the container is the cost of the base plus the cost of the sides:
+    \begin{align}
+        C &= C_{base} + C_{sides} \\
+        C_{base} &= 10 \cdot (l \cdot w) = 10 \cdot (2w \cdot w) = 20w^2 \\
+        C_{sides} &= 6 \cdot (2(lh) + 2(wh)) = 6 \cdot (2(2wh) + 2(wh)) = 6 \cdot (4wh + 2wh) = 6 \cdot 6wh = 36wh \\
+        C_{sides} &= 36w \cdot \frac{5}{w^2} = \frac{180}{w} \\
+        C &= 20w^2 + \frac{180}{w}
+    \end{align}
+    To minimize the cost, we take the derivative of $C$ with respect to $w$ and set it to zero:
+    \begin{align}
+        \frac{dC}{dw} &= 40w - \frac{180}{w^2} \\
+        0 &= 40w - \frac{180}{w^2} \\
+        40w^3 &= 180 \\
+        w^3 &= \frac{9}{2} \\
+        w &= \sqrt[3]{\frac{9}{2}} \approx 1.65 \, m
+    \end{align}
+    \begin{align}
+        h &= \frac{5}{w^2} = \frac{5}{(\sqrt[3]{\frac{9}{2}})^2} = \frac{5}{(\frac{9}{2})^{2/3}} \approx 1.83 \,m
+    \end{align}
+    The minimum cost: \\
+    $C = 20w^2 + \frac{180}{w}$ \\
+    $C = 20(1.65)^2 + \frac{180}{1.65} \approx \$163.54$ \\
+
+    The cost of materials for the cheapest container is approximately \$163.54.
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) A social scientist decides to study in depth one individual to be randomly sampled from a given population.  
+The social scientist is worried about the possibility that the chosen individual will refuse to cooperate.  
+A previous student provides data on the probability of noncooperation for individuals in different income classes.
+\begin{center}
+    \begin{tabular}{l|c}
+        High Income & 0.08 \\
+        Middle Income & 0.10 \\
+        Low Income & 0.04
+    \end{tabular}
+\end{center}
+The scientist knows that in the population the proportion of high income people is 0.25, of medium income people is 0.5, 
+and low income people is 0.25.
+\begin{enumerate}
+    \item What is the probability that a randomly selected individual will be noncooperative?
+    \begin{align}
+        P(NC) &= P(NC|HI)P(HI) + P(NC|MI)P(MI) + P(NC|LI)P(LI) \\
+        &= (0.08)(0.25) + (0.10)(0.5) + (0.04)(0.25) \\
+        &= 0.02 + 0.05 + 0.01 \\
+        &= 0.08
+    \end{align}
+    \item Assuming that a randomly selected individual is noncooperative, what is the probability that that individual has low income?
+    The probability that a randomly selected individual is noncooperative and has low income is given by:
+    \begin{align}
+        P(NC \cap LI) &= P(NC|LI)P(LI) \\
+        &= (0.04)(0.25) \\
+        &= 0.01
+    \end{align}
+    Using Bayes' theorem, we can find the probability that a randomly selected individual has low income given that they are noncooperative:
+    \begin{align}
+        P(LI|NC) &= \frac{P(NC \cap LI)}{P(NC)} \\
+        &= \frac{0.01}{0.08} \\
+        &= 0.125
+    \end{align}
+\end{enumerate}
+\end{problem}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) If the function $f(x) = x^3 + ax^2 + bx$ has the local minimum value of $\frac{-2}{9}\sqrt{3}$ at $x = \frac{1}{\sqrt{3}}$, 
+what are the values of $a$ and $b$.
+\end{problem}
+
+\begin{solution}
+    \begin{align}
+        f'(x) &= 3x^2 + 2ax + b
+    \end{align}
+    Since $f(x)$ has a local minimum at $x = \frac{1}{\sqrt{3}}$, we know that $f'(\frac{1}{\sqrt{3}}) = 0$:
+    \begin{align}
+        f'(\frac{1}{\sqrt{3}}) &= 3(\frac{1}{\sqrt{3}})^2 + 2a(\frac{1}{\sqrt{3}}) + b = 0 \\
+        3(\frac{1}{3}) + \frac{2a}{\sqrt{3}} + b &= 0 \\
+        1 + \frac{2a}{\sqrt{3}} + b &= 0 \\
+        \frac{2a}{\sqrt{3}} + b &= -1 \quad (1)
+    \end{align}
+    Next, we know that $f(\frac{1}{\sqrt{3}}) = \frac{-2}{9}\sqrt{3}$:
+    \begin{align}
+        f(\frac{1}{\sqrt{3}}) &= (\frac{1}{\sqrt{3}})^3 + a(\frac{1}{\sqrt{3}})^2 + b(\frac{1}{\sqrt{3}}) = \frac{-2}{9}\sqrt{3} \\
+        \frac{1}{3\sqrt{3}} + a(\frac{1}{3}) + b(\frac{1}{\sqrt{3}}) &= \frac{-2}{9}\sqrt{3} \\
+        \frac{1}{3\sqrt{3}} + \frac{a}{3} + \frac{b}{\sqrt{3}} &= \frac{-2}{9}\sqrt{3} \\
+        \frac{a}{3} + \frac{b}{\sqrt{3}} &= \frac{-2}{9}\sqrt{3} - \frac{1}{3\sqrt{3}} \\
+        \frac{a}{3} + \frac{b}{\sqrt{3}} &= \frac{-6 - 1}{9\sqrt{3}} \\
+        \frac{a}{3} + \frac{b}{\sqrt{3}} &= \frac{-7}{9\sqrt{3}} \quad (2)
+    \end{align}
+    Multiplying equation (1) by $\sqrt{3}$ gives:
+    \begin{align}
+        2a + b\sqrt{3} &= -\sqrt{3} \quad (3)
+    \end{align}
+    Multiplying equation (2) by $3\sqrt{3}$ gives:
+    \begin{align}
+        a\sqrt{3} + 3b &= -\frac{7}{3} \quad (4)
+    \end{align}
+    Multiplying equation (3) by 3 gives:
+    \begin{align}
+        6a + 3b\sqrt{3} &= -3\sqrt{3} \quad (5)
+    \end{align}
+    Multiplying equation (4) by $\sqrt{3}$ gives:
+    \begin{align}
+        a \cdot 3 + 3b\sqrt{3} &= -\frac{7\sqrt{3}}{3} \quad (6)
+    \end{align}
+    Subtracting equation (6) from equation (5) gives:
+    \begin{align}
+        3a &= -3\sqrt{3} + \frac{7\sqrt{3}}{3} \\
+        3a &= \frac{-9\sqrt{3} + 7\sqrt{3}}{3} \\
+        3a &= \frac{-2\sqrt{3}}{3} \\
+        a &= \frac{-2\sqrt{3}}{9} \\
+        a &= -2
+    \end{align}
+    Substituting $a = -2$ into equation (1) gives:
+    \begin{align}
+        \frac{2(-2)}{\sqrt{3}} + b &= -1 \\
+        \frac{-4}{\sqrt{3}} + b &= -1 \\
+        b &= -1 + \frac{4}{\sqrt{3}} \\
+        b &= 1
+    \end{align}
+    The values of $a$ and $b$ are $-2$ and $1$ respectively.
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) Consider the function: $f(x,y) = x^2y + 3sin(xy) + 2y^2$.  We apply gradient descent with a fixed learning rate $\alpha = 0.1$
+starting from the initial point $(x_0, y_0) = (1,1)$. Using gradient descent, compute the points $(x_1, y_1)$, $(x_2, y_2)$, and $(x_3, y_3)$
+reached after three iterations.
+\end{problem}
+
+\begin{solution}
+    The gradient of $f(x,y)$:
+    \begin{align}
+        \frac{\partial f}{\partial x} &= 2xy + 3ycos(xy) \\
+        \frac{\partial f}{\partial y} &= x^2 + 3xcos(xy) + 4y
+    \end{align}
+    The gradient at the initial point $(x_0, y_0) = (1,1)$:
+    \begin{align}
+        \nabla f(1,1) &= \begin{bmatrix}
+            2(1)(1) + 3(1)cos(1) \\
+            (1)^2 + 3(1)cos(1) + 4(1)
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            2 + 3cos(1) \\
+            1 + 3cos(1) + 4
+        \end{bmatrix} \\
+        &= \begin{bmatrix}
+            2 + 3cos(1) \\
+            5 + 3cos(1)
+        \end{bmatrix}
+    \end{align}
+    Perform the gradient descent updates:
+    \begin{align}
+        (x_1, y_1) &= (x_0, y_0) - \alpha \nabla f(x_0, y_0) \\
+        &= (1, 1) - 0.1 \begin{bmatrix}
+            2 + 3cos(1) \\
+            5 + 3cos(1)
+        \end{bmatrix} \\
+        &= (1 - 0.1(2 + 3cos(1)), 1 - 0.1(5 + 3cos(1))) \\
+        &= (1 - 0.2 - 0.3cos(1), 1 - 0.5 - 0.3cos(1)) \\
+        &= (0.8 - 0.3cos(1), 0.5 - 0.3cos(1))
+    \end{align}
+    \begin{align}
+        \nabla f(x_1, y_1) &= \begin{bmatrix}
+            2x_1y_1 + 3y_1cos(x_1y_1) \\
+            x_1^2 + 3x_1cos(x_1y_1) + 4y_1
+        \end{bmatrix} \\
+        (x_2, y_2) &= (x_1, y_1) - 0.1 \nabla f(x_1, y_1) \\
+        \nabla f(x_2, y_2) &= \begin{bmatrix}
+            2x_2y_2 + 3y_2cos(x_2y_2) \\
+            x_2^2 + 3x_2cos(x_2y_2) + 4y_2
+        \end{bmatrix} \\
+        (x_3, y_3) &= (x_2, y_2) - 0.1 \nabla f(x_2, y_2)
+    \end{align}
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(5 points)  Find the derivative of $(4x^2 - 7)^{2+\sqrt{x^2 - 5}}$ using logarithmic differentiation.
+\end{problem}
+
+\begin{solution}
+    \begin{align}
+        log(y) &= log((4x^2 - 7)^{2+\sqrt{x^2 - 5}}) = (2+\sqrt{x^2 - 5})log(4x^2 - 7) \\
+        \frac{1}{y} \frac{dy}{dx} &= \frac{d}{dx}[(2+\sqrt{x^2 - 5})log(4x^2 - 7)] \\
+        \frac{1}{y} \frac{dy}{dx} &= log(4x^2 - 7) \frac{d}{dx}(2+\sqrt{x^2 - 5}) + (2+\sqrt{x^2 - 5}) \frac{d}{dx}[log(4x^2 - 7)] \\
+        \frac{1}{y} \frac{dy}{dx} &= log(4x^2 - 7) \frac{1}{2\sqrt{x^2 - 5}}(2x) + (2+\sqrt{x^2 - 5}) \frac{1}{4x^2 - 7}(8x) \\
+        \frac{dy}{dx} &= y [ log(4x^2 - 7) \frac{x}{\sqrt{x^2 - 5}} + (2+\sqrt{x^2 - 5}) \frac{8x}{4x^2 - 7} ] \\
+        \frac{dy}{dx} &= (4x^2 - 7)^{2+\sqrt{x^2 - 5}} [ log(4x^2 - 7) \frac{x}{\sqrt{x^2 - 5}} + (2+\sqrt{x^2 - 5}) \frac{8x}{4x^2 - 7} ]
+    \end{align}
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(10 points) The breakdown voltage of a randomly chosen diode of a certain type is known to be normally distributed with a mean value of 
+40 volt and standard deviation of 1.5 volt.
+\begin{enumerate}
+    \item What is the probability that the voltage of a single diode is between 39 and 42?
+    \item What value is such that only 15\% of all diodes have voltages exceedign that value?
+    \item If four diodes are independently selected, what is the probability that at least one has a voltage exceeding 42?
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+    The proability that the voltage of a single diode is between 39 and 42 is approximately 0.5793.
+    \begin{align}
+        Z_1 = \frac{39 - 40}{1.5} &\approx -0.6667 \\
+        Z_2 = \frac{42 - 40}{1.5} &\approx 1.3333 \\
+        P(Z < -0.6667) &\approx 0.2525 \\
+        P(Z < 1.3333) &\approx 0.9082
+    \end{align}
+    The probability that the voltage is between 39 and 42 is:
+    \begin{align}
+        P(39 < X < 42) &= P(Z < 1.3333) - P(Z < -0.6667) \\
+        &\approx 0.9082 - 0.2525 \\
+        &\approx 0.6557
+    \end{align}
+\end{solution}
+
+\begin{solution}
+    \item The value such that only 15\% of all diodes have voltages exceeding that value is approximately 42.06 volts.
+    We need to find the z-score corresponding to the 85th percentile (since 15\% exceed that value):
+    \begin{align}
+        Z_{0.85} &\approx 1.036 \\
+        X &= \mu + Z\sigma \\
+        X &= 40 + 1.036 \cdot 1.5 \\
+        X &\approx 40 + 1.554 \\
+        X &\approx 41.554
+    \end{align}
+\end{solution}
+\begin{solution}
+    \item The probability that a single diode has a voltage exceeding 42:
+    \begin{align}
+        Z &= \frac{42 - 40}{1.5} \approx 1.3333
+    \end{align}
+    \begin{align}
+        P(Z < 1.3333) &\approx 0.9082 \\
+        P(X > 42) &= 1 - P(Z < 1.3333) \\
+        &\approx 1 - 0.9082 \\
+        &\approx 0.0918
+    \end{align}
+    \begin{align}
+        P(\text{none exceed 42}) &= (1 - P(X > 42))^4 \\
+        &\approx (1 - 0.0918)^4 \\
+        &\approx (0.9082)^4 \\
+        &\approx 0.6811
+    \end{align}
+    \begin{align}
+        P(\text{at least one exceeds 42}) &= 1 - P(\text{none exceed 42}) \\
+        &\approx 1 - 0.6811 \\
+        &\approx 0.3189
+    \end{align}
+\end{solution}
+%----------------------------------------------------------------------
+
+\begin{problem}
+(15 points) Find the values of $a,b$ and $c$ if the parabola $y=ax^2+bx+c$, is to be tangent to the line $y=4x+1$, at the point (-1, -3),
+and is to have a critical point at x = -2.
+\end{problem}
+
+\begin{solution}
+    Since the parabola is tangent to the line at the point (-1, -3), we know that:
+    \begin{align}
+        ax^2 + bx + c &= 4x + 1 \quad \text{at } x = -1 \\
+        a(-1)^2 + b(-1) + c &= 4(-1) + 1 \\
+        a - b + c &= -4 + 1 \\
+        a - b + c &= -3 \quad (1)
+    \end{align}
+    Since the parabola has a critical point at x = -2, we know that the derivative of the parabola is zero at that point:
+    \begin{align}
+        \frac{dy}{dx} &= 2ax + b \\
+        2a(-2) + b &= 0 \\
+        -4a + b &= 0 \\
+        b &= 4a \quad (2)
+    \end{align}
+    \begin{align}
+        a - (4a) + c &= -3 \\
+        -3a + c &= -3 \\
+        c &= 3a - 3 \quad (3)
+    \end{align}
+    To solve for $a$. The slope of the tangent line at the point (-1, -3) must equal the derivative of the parabola at that point:
+    \begin{align}
+        \frac{dy}{dx} &= 2ax + b \\
+        2a(-1) + b &= 4 \\
+        -2a + b &= 4 \quad (4)
+    \end{align}
+    \begin{align}
+        -2a + (4a) &= 4 \\
+        2a &= 4 \\
+        a &= 2
+    \end{align}
+    Substitute $a = 2$ into equations (2) and (3) to find $b$ and $c$:
+    \begin{align}
+        b &= 4(2) = 8 \\
+        c &= 3(2) - 3 = 6 - 3 = 3
+    \end{align}
+    The values of $a$, $b$, and $c$ are $2$, $8$, and $3$ respectively.
+\end{solution}
+
+%----------------------------------------------------------------------
+
+\begin{problem}
+(0 points) Would you like to be considered for a Course Assistant position for this course in Spring 2026?
+\begin{enumerate}
+    \item Yes
+    \item No
+\end{enumerate}
+\end{problem}
+
+\begin{solution}
+\end{solution}
+I would consider it an honor to be considered for a Course Assistant position for CS556 in Spring 2026.  I know that I have a 
+lot of work to do in order to improve my mastery of the material, but I am committed to doing so.  I believe that being a Course Assistant
+would help me to achieve that goal, and I would be grateful for the opportunity.  In addition I have substantial experience creating material
+and training programs to introduce new technologies to software developers and other technical professionals in my work outside of school, and I believe that
+this experience would help me to be an effective Course Assistant.
+\end{document}
